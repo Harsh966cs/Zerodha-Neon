@@ -69,14 +69,7 @@ function PlaceholderImg({ size = 48, src }) {
 
 function Navbar1() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const { isSignedIn } = useAuth();
   const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3001";
-
-  React.useEffect(() => {
-    if (isSignedIn && window.location.origin !== dashboardUrl) {
-      window.location.assign(`${dashboardUrl}/`);
-    }
-  }, [dashboardUrl, isSignedIn]);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -113,24 +106,9 @@ function Navbar1() {
               </Button>
             ))}
 
-            <SignedOut>
-              <SignInButton mode="modal">
-                <Button sx={{ ml: 1.5, borderRadius: 2, textTransform: 'none', backgroundColor: '#387ed1', color: '#fff', '&:hover': { backgroundColor: '#2d69b3' } }}>
-                  Sign in
-                </Button>
-              </SignInButton>
-              <SignUpButton mode="modal">
-                <Button sx={{ ml: 1, borderRadius: 2, textTransform: 'none', border: '1px solid #dfe6ee', color: '#1f2730', '&:hover': { backgroundColor: '#f3f5f8' } }}>
-                  Sign up
-                </Button>
-              </SignUpButton>
-            </SignedOut>
-
-            <SignedIn>
-              <Box sx={{ ml: 1.5, display: 'flex', alignItems: 'center' }}>
-                <UserButton afterSignOutUrl="/" />
-              </Box>
-            </SignedIn>
+            {process.env.REACT_APP_CLERK_PUBLISHABLE_KEY && (
+              <AuthControls dashboardUrl={dashboardUrl} />
+            )}
           </Box>
 
           <IconButton
@@ -228,4 +206,38 @@ function Navbar1() {
     </AppBar>
   );
 }
+
+function AuthControls({ dashboardUrl }) {
+  const { isSignedIn } = useAuth();
+
+  React.useEffect(() => {
+    if (isSignedIn && window.location.origin !== dashboardUrl) {
+      window.location.assign(`${dashboardUrl}/`);
+    }
+  }, [dashboardUrl, isSignedIn]);
+
+  return (
+    <>
+      <SignedOut>
+        <SignInButton mode="modal">
+          <Button sx={{ ml: 1.5, borderRadius: 2, textTransform: 'none', backgroundColor: '#387ed1', color: '#fff', '&:hover': { backgroundColor: '#2d69b3' } }}>
+            Sign in
+          </Button>
+        </SignInButton>
+        <SignUpButton mode="modal">
+          <Button sx={{ ml: 1, borderRadius: 2, textTransform: 'none', border: '1px solid #dfe6ee', color: '#1f2730', '&:hover': { backgroundColor: '#f3f5f8' } }}>
+            Sign up
+          </Button>
+        </SignUpButton>
+      </SignedOut>
+
+      <SignedIn>
+        <Box sx={{ ml: 1.5, display: 'flex', alignItems: 'center' }}>
+          <UserButton afterSignOutUrl="/" />
+        </Box>
+      </SignedIn>
+    </>
+  );
+}
+
 export default Navbar1;
