@@ -300,10 +300,6 @@ async function start() {
   await seedDefaultStocks();
   app.listen(PORT, () => {
     console.log(`Neon backend is listening on port ${PORT}`);
-
-1111
-
-
 });
 }
 
