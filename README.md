@@ -28,7 +28,7 @@ Neon PostgreSQL
 | `frontend` | Public landing pages, pricing, products, sign-in, and sign-up | React, React Router, Material UI, Clerk |
 | `dashboard` | Authenticated watchlist and portfolio dashboard | React, React Router, Axios, Chart.js, Clerk |
 | `backendWithNeon` | Active API and database integration | Node.js, Express, Neon PostgreSQL, Clerk |
-| `backend` | Original MongoDB implementation kept as a legacy reference | Node.js, Express, Mongoose |
+| `render.yaml` | Render service definition for the active backend | Render |
 
 The active application uses `backendWithNeon`. The `backend` folder is not used by the current dashboard and is retained only as a migration reference. It can be removed later after the Neon deployment is stable and backed up.
 
@@ -123,6 +123,49 @@ SELECT id, symbol, name, current_price, day_change
 FROM stocks
 ORDER BY symbol;
 ```
+
+## Deploying a resume-ready demo
+
+The repository includes deployment configuration for the three applications:
+
+- Deploy `frontend/` as a Vercel project.
+- Deploy `dashboard/` as a separate Vercel project.
+- Deploy the repository with `render.yaml` to Render for `backendWithNeon/`.
+
+For both Vercel projects, set the project root directory to the matching folder and configure:
+
+### Frontend Vercel variables
+
+```env
+REACT_APP_CLERK_PUBLISHABLE_KEY=
+REACT_APP_AFTER_SIGN_UP_URL=https://<dashboard-domain>/
+REACT_APP_DASHBOARD_URL=https://<dashboard-domain>
+```
+
+### Dashboard Vercel variables
+
+```env
+REACT_APP_API_URL=https://<backend-domain>
+REACT_APP_CLERK_PUBLISHABLE_KEY=
+REACT_APP_AFTER_SIGN_UP_URL=https://<dashboard-domain>/
+REACT_APP_FRONTEND_URL=https://<frontend-domain>
+```
+
+### Render variables
+
+```env
+PGHOST=
+PGDATABASE=
+PGUSER=
+PGPASSWORD=
+CLERK_SECRET_KEY=
+CLERK_PUBLISHABLE_KEY=
+ALLOWED_ORIGINS=https://<frontend-domain>,https://<dashboard-domain>
+```
+
+Run `schema.sql` and `seed.sql` in Neon before opening the deployed dashboard. In Clerk, add the frontend and dashboard domains to the allowed origins and configure the sign-in/sign-up redirect URLs used by the environment variables. Never commit real keys or database credentials.
+
+This is an educational demo with static seeded prices. It does not connect to a stock exchange, place real orders, or manage real funds.
 
 ## Running locally
 
@@ -306,5 +349,5 @@ Be ready to explain:
 - Add admin-only stock management.
 - Add automated API and component tests.
 - Add deployment configuration for frontend, dashboard, backend, Clerk, and Neon.
-- Remove the legacy MongoDB backend after confirming the Neon deployment and taking a backup.
+- Consider adding automated API and component tests after the public demo is stable.
 #
