@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "@clerk/clerk-react";
 import { VerticalGraph } from "./VerticalGraph";
+import GeneralContext from "./GeneralContext";
 
 const Holdings = () => {
   const [allHoldings, setAllHoldings] = useState([]);
   const { getToken } = useAuth();
+  const { refreshTrigger } = useContext(GeneralContext);
 
   useEffect(() => {
     const loadHoldings = async () => {
@@ -20,7 +22,7 @@ const Holdings = () => {
       }
     };
     loadHoldings();
-  }, [getToken]);
+  }, [getToken, refreshTrigger]);
 
   
   // const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
@@ -36,6 +38,21 @@ const Holdings = () => {
       },
     ],
   };
+
+  const totals = allHoldings.reduce((result, stock) => {
+    const quantity = Number(stock.qty);
+    const averagePrice = Number(stock.avg);
+    const currentPrice = Number(stock.price);
+    result.investment += quantity * averagePrice;
+    result.currentValue += quantity * currentPrice;
+    return result;
+  }, { investment: 0, currentValue: 0 });
+  const profitLoss = totals.currentValue - totals.investment;
+  const profitLossPercent = totals.investment > 0 ? (profitLoss / totals.investment) * 100 : 0;
+  const formatMoney = (value) => Number(value).toLocaleString("en-IN", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
   // export const data = {
   //   labels,
@@ -99,19 +116,17 @@ const Holdings = () => {
 
       <div className="row">
         <div className="col">
-          <h5>
-            29,875.<span>55</span>{" "}
-          </h5>
+          <h5>{formatMoney(totals.investment)}</h5>
           <p>Total investment</p>
         </div>
         <div className="col">
-          <h5>
-            31,428.<span>95</span>{" "}
-          </h5>
+          <h5>{formatMoney(totals.currentValue)}</h5>
           <p>Current value</p>
         </div>
         <div className="col">
-          <h5>1,553.40 (+5.20%)</h5>
+          <h5 className={profitLoss >= 0 ? "profit" : "loss"}>
+            {formatMoney(profitLoss)} ({profitLoss > 0 ? "+" : ""}{profitLossPercent.toFixed(2)}%)
+          </h5>
           <p>P&L</p>
         </div>
       </div>

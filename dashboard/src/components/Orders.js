@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "@clerk/clerk-react";
+import GeneralContext from "./GeneralContext";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const { getToken } = useAuth();
+  const { refreshTrigger } = useContext(GeneralContext);
 
   useEffect(() => {
     const loadOrders = async () => {
@@ -24,7 +26,7 @@ const Orders = () => {
     };
 
     loadOrders();
-  }, [getToken]);
+  }, [getToken, refreshTrigger]);
 
   return (
     <>

@@ -4,13 +4,12 @@ import axios from "axios";
 import { useAuth } from "@clerk/clerk-react";
 import GeneralContext from "./GeneralContext";
 
-import { Tooltip, Grow } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grow, Tooltip, Typography } from "@mui/material";
 
 import {
   BarChartOutlined,
   KeyboardArrowDown,
   KeyboardArrowUp,
-  MoreHoriz,
 } from "@mui/icons-material";
 
 import { DoughnutChart } from "./DoughnoutChart";
@@ -20,6 +19,7 @@ const WatchList = () => {
   const [stocks, setStocks] = useState([]);
   const [search, setSearch] = useState("");
   const { getToken } = useAuth();
+  const { refreshTrigger } = useContext(GeneralContext);
 
   useEffect(() => {
     const loadStocks = async () => {
@@ -37,7 +37,7 @@ const WatchList = () => {
       }
     };
     loadStocks();
-  }, [getToken]);
+  }, [getToken, refreshTrigger]);
 
   const addToWatchlist = async (stock) => {
     try {
@@ -160,6 +160,7 @@ export default WatchList;
 
 const WatchListItem = ({ stock }) => {
   const [showWatchlistActions, setShowWatchlistActions] = useState(false);
+  const [analyticsOpen, setAnalyticsOpen] = useState(false);
 
   const handleMouseEnter = (e) => {
     setShowWatchlistActions(true);
@@ -183,54 +184,54 @@ const WatchListItem = ({ stock }) => {
           <span className="price">{Number(stock.price).toFixed(2)}</span>
         </div>
       </div>
-      {showWatchlistActions && <WatchListActions uid={stock.symbol} />}
+      {(showWatchlistActions || analyticsOpen) && (
+        <WatchListActions stock={stock} analyticsOpen={analyticsOpen} setAnalyticsOpen={setAnalyticsOpen} />
+      )}
     </li>
   );
 };
 
-const WatchListActions = ({ uid }) => {
+const WatchListActions = ({ stock, analyticsOpen, setAnalyticsOpen }) => {
   const generalContext = useContext(GeneralContext);
 
-  const handleBuyClick = () => {
-    generalContext.openBuyWindow(uid);
+  const openOrder = (mode) => {
+    generalContext.openBuyWindow(stock, mode);
   };
+
+  const dayChange = Number(stock.day_change);
+  const price = Number(stock.price);
 
   return (
     <span className="actions">
       <span>
-        <Tooltip
-          title="Buy (B)"
-          placement="top"
-          arrow
-          TransitionComponent={Grow}
-          onClick={handleBuyClick}
-        >
-          <button className="buy">Buy</button>
+        <Tooltip title="Buy" placement="top" arrow TransitionComponent={Grow}>
+          <button type="button" className="buy" onClick={() => openOrder("BUY")}>Buy</button>
         </Tooltip>
-        <Tooltip
-          title="Sell (S)"
-          placement="top"
-          arrow
-          TransitionComponent={Grow}
-        >
-          <button className="sell">Sell</button>
+        <Tooltip title="Sell" placement="top" arrow TransitionComponent={Grow}>
+          <button type="button" className="sell" onClick={() => openOrder("SELL")}>Sell</button>
         </Tooltip>
-        <Tooltip
-          title="Analytics (A)"
-          placement="top"
-          arrow
-          TransitionComponent={Grow}
-        >
-          <button className="action">
+        <Tooltip title="Analytics" placement="top" arrow TransitionComponent={Grow}>
+          <button type="button" className="action" onClick={() => setAnalyticsOpen(true)} aria-label={`View ${stock.symbol} analytics`}>
             <BarChartOutlined className="icon" />
           </button>
         </Tooltip>
-        <Tooltip title="More" placement="top" arrow TransitionComponent={Grow}>
-          <button className="action">
-            <MoreHoriz className="icon" />
-          </button>
-        </Tooltip>
       </span>
+      <Dialog open={analyticsOpen} onClose={() => setAnalyticsOpen(false)} aria-labelledby="stock-analytics-title">
+        <DialogTitle id="stock-analytics-title">{stock.symbol} analytics</DialogTitle>
+        <DialogContent dividers>
+          <Typography variant="body2" color="text.secondary" gutterBottom>Latest quote</Typography>
+          <Typography variant="h4" component="p" sx={{ mb: 2 }}>₹{Number.isFinite(price) ? price.toFixed(2) : "—"}</Typography>
+          <Typography color={dayChange < 0 ? "error.main" : "success.main"}>
+            Day change: {Number.isFinite(dayChange) ? `${dayChange > 0 ? "+" : ""}${dayChange.toFixed(2)}%` : "—"}
+          </Typography>
+          <Typography variant="caption" color="text.secondary" display="block" sx={{ mt: 2 }}>
+            Quote data is seeded demo data and does not represent live market prices.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setAnalyticsOpen(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
     </span>
   );
 };

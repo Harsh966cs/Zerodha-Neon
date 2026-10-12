@@ -234,6 +234,7 @@ Authorization: Bearer <Clerk session token>
 | `GET` | `/api/positions` | Lists the current user's positions |
 | `POST` | `/api/positions` | Adds or updates a position |
 | `POST` | `/api/buy` | Records a buy and updates weighted-average holdings |
+| `POST` | `/api/sell` | Records a sell and reduces the current user's holdings |
 | `GET` | `/api/orders` | Lists the current user's transactions |
 
 The backend never trusts a user ID from the request body. It gets the user identity from the verified Clerk token.
