@@ -14,7 +14,6 @@ const pages = [
   { label: 'About', to: '/about' },
   { label: 'Products', to: '/products' },
   { label: 'Pricing', to: '/pricing' },
-  { label: 'Support', to: '/support' },
 ];
 
 function Navbar1() {
@@ -38,7 +37,8 @@ function Navbar1() {
                 to={page.to}
                 sx={{
                   mx: { xs: 0.75, md: 1.5 }, px: 0, minWidth: 'auto', color: '#5a6570', fontWeight: 400,
-                  fontSize: { xs: '0.8rem', md: '0.95rem' }, textTransform: 'none',
+                  minHeight: 44,
+                  fontSize: { xs: '0.875rem', md: '0.95rem' }, textTransform: 'none',
                   '&:hover': { backgroundColor: 'transparent', color: '#387ed1' },
                 }}
               >
@@ -69,20 +69,22 @@ function AuthControls({ dashboardUrl }) {
   return (
     <>
       <SignedOut>
-        <SignInButton mode="modal">
-          <Button sx={{ ml: 1.5, borderRadius: 2, textTransform: 'none', backgroundColor: '#387ed1', color: '#fff', '&:hover': { backgroundColor: '#2d69b3' } }}>
-            Sign in
-          </Button>
-        </SignInButton>
-        <SignUpButton mode="modal">
-          <Button sx={{ ml: 1, borderRadius: 2, textTransform: 'none', border: '1px solid #dfe6ee', color: '#1f2730', '&:hover': { backgroundColor: '#f3f5f8' } }}>
-            Sign up
-          </Button>
-        </SignUpButton>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: { xs: 'center', md: 'flex-start' }, flexWrap: 'wrap', gap: 1, width: { xs: '100%', md: 'auto' }, mt: { xs: 0.5, md: 0 } }}>
+          <SignInButton mode="modal">
+            <Button sx={{ minHeight: 44, borderRadius: 2, textTransform: 'none', backgroundColor: '#387ed1', color: '#fff', '&:hover': { backgroundColor: '#2d69b3' } }}>
+              Sign in
+            </Button>
+          </SignInButton>
+          <SignUpButton mode="modal">
+            <Button sx={{ minHeight: 44, borderRadius: 2, textTransform: 'none', border: '1px solid #dfe6ee', color: '#1f2730', '&:hover': { backgroundColor: '#f3f5f8' } }}>
+              Sign up
+            </Button>
+          </SignUpButton>
+        </Box>
       </SignedOut>
 
       <SignedIn>
-        <Box sx={{ ml: 1.5, display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ ml: { xs: 0, md: 1.5 }, width: { xs: '100%', md: 'auto' }, display: 'flex', alignItems: 'center', justifyContent: { xs: 'center', md: 'flex-start' }, mt: { xs: 0.5, md: 0 } }}>
           <UserButton afterSignOutUrl="/" />
         </Box>
       </SignedIn>

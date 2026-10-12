@@ -4,20 +4,23 @@ import { getDashboardRedirectUrl } from "../../config/urls";
 
 const Singup = () => {
   return (
-   <div className='container p-5'>
-        <div className='row text-center' >
-            <h1>Open a Zerodha account</h1>
-            <p style={{color:"gray",marginTop:"30px",marginBottom:"30px"}}>Simple and intuitive apps · ₹0 for investments · ₹20 for intraday and F&O trades.</p>
-            <p style={{marginLeft:"33%"}}>
-            <SignUp 
-              routing="path"
-              path="/singup"
-              forceRedirectUrl={getDashboardRedirectUrl(process.env.REACT_APP_AFTER_SIGN_UP_URL)}
-              signInUrl="/sign-in"
-            />
-            </p>
+    <main className="signup-page">
+      <div className="signup-page__content">
+        <h1>Open a Zerodha account</h1>
+        <p className="signup-page__description">
+          Simple and intuitive apps · ₹0 for investments · ₹20 for intraday and F&amp;O trades.
+        </p>
+        <div className="signup-page__form">
+          <SignUp
+            routing="path"
+            path="/singup"
+            forceRedirectUrl={getDashboardRedirectUrl(process.env.REACT_APP_AFTER_SIGN_UP_URL)}
+            signInUrl="/sign-in"
+            appearance={{ elements: { rootBox: "signup-clerk-root" } }}
+          />
         </div>
-    </div>
+      </div>
+    </main>
   )
 }
 

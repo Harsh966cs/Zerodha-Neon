@@ -218,4 +218,72 @@
     background: #9b9b9b;
     color: #fff;
   }
+
+  @media (max-width: 767px) {
+    .container#buy-window {
+      width: calc(100% - 1rem);
+      max-width: 32rem;
+      height: auto;
+      max-height: calc(100dvh - 1rem);
+      overflow-y: auto;
+      left: 50%;
+      bottom: 0.5rem;
+      transform: translateX(-50%);
+      cursor: auto;
+    }
+
+    .regular-order {
+      padding: 1rem;
+    }
+
+    .inputs {
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .inputs fieldset {
+      flex: 1 1 8rem;
+      min-width: 0;
+      max-width: none;
+      margin-right: 0;
+    }
+
+    .inputs fieldset input {
+      width: 100%;
+      max-width: none;
+      min-height: 44px;
+      margin-right: 0;
+    }
+
+    .buttons {
+      position: static;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0 1rem 1rem;
+    }
+
+    .buttons > div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .buttons button {
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .container#buy-window {
+      width: min(70vw, 34rem);
+      height: auto;
+      max-height: 80vh;
+      overflow-y: auto;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: auto;
+    }
+  }
   

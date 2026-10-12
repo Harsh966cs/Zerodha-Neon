@@ -6,7 +6,6 @@ import Singup from  '../src/landing_page/Singup/Singup';
 import Pricing from  '../src/landing_page/Pricing/PricingPage';
 import About from    '../src/landing_page/About/About';
 import Products from  '../src/landing_page/Products/ProductPage'
-import Support from '../src/landing_page/Support/Support'
 import {BrowserRouter,Route,Routes} from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
 import Footer from './landing_page/Footer';
@@ -46,7 +45,6 @@ const appContent = (
       <Route path="/singup/*" element={<Singup/>}/>
       <Route path="/sign-in/*" element={<Signin/>}/>
       <Route path='/about' element={<About/>}/>
-      <Route path='/support' element={<Support/>}/>
       <Route path='/products' element={<Products/>}/>
       <Route path='/pricing' element={<Pricing/>}/>
     </Routes>

@@ -46,10 +46,10 @@ export default function BasicTabs() {
      <div className='container'>
     <Box sx={{ width: '100%' }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab sx={{fontSize:"2rem",textTransform:"none"}} label="Equity" {...a11yProps(0)} />
-          <Tab sx={{fontSize:"2rem",textTransform:"none"}} label="Currency" {...a11yProps(1)} />
-          <Tab sx={{fontSize:"2rem",textTransform:"none"}} label="Commodity" {...a11yProps(2)} />
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" variant="scrollable" scrollButtons="auto">
+          <Tab sx={{fontSize:{xs:"1.25rem",sm:"1.5rem",md:"2rem"},textTransform:"none",minHeight:44}} label="Equity" {...a11yProps(0)} />
+          <Tab sx={{fontSize:{xs:"1.25rem",sm:"1.5rem",md:"2rem"},textTransform:"none",minHeight:44}} label="Currency" {...a11yProps(1)} />
+          <Tab sx={{fontSize:{xs:"1.25rem",sm:"1.5rem",md:"2rem"},textTransform:"none",minHeight:44}} label="Commodity" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>

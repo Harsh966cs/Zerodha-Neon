@@ -14,3 +14,163 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.signup-page {
+  box-sizing: border-box;
+  width: 100%;
+  padding: clamp(1.5rem, 5vw, 3rem) 1rem;
+}
+
+.signup-page__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.signup-page__content h1 {
+  max-width: 100%;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.signup-page__description {
+  width: min(100%, 34rem);
+  margin: 0;
+  color: gray;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  line-height: 1.6;
+}
+
+.signup-page__form,
+.signup-clerk-root {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 32rem;
+  min-width: 0;
+  margin: 0 auto;
+}
+
+.signup-page__form > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+@media (max-width: 1023px) {
+  .row[style*="padding: 150px"],
+  div[style*="padding: 100px"] {
+    padding: 2rem !important;
+  }
+
+  .MuiTableContainer-root {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .row > .col-4,
+  .row > .col-3 {
+    flex: 0 0 50%;
+    width: 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .MuiTableContainer-root {
+    max-width: 100%;
+  }
+
+  .row img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .row {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .row > [class*="col-"] {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .container button.btn,
+  .row button[style*="width: 20%"] {
+    width: min(100%, 18rem) !important;
+    min-height: 44px;
+  }
+
+  .container a.btn {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .container img,
+  .row img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .row[style*="padding: 150px"],
+  div[style*="padding: 100px"] {
+    padding: 1rem !important;
+  }
+
+  .container.row h3,
+  .container.row p {
+    margin-right: auto !important;
+    margin-left: auto !important;
+    max-width: 100%;
+  }
+
+  .container.row p[style*="font-size: 23px"] {
+    font-size: clamp(14px, 4vw, 23px) !important;
+  }
+
+  .row ul[style*="display: flex"] {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-left: 0 !important;
+  }
+
+  .row ul[style*="display: flex"] li {
+    margin-right: 0.5rem !important;
+  }
+
+  .MuiTabs-root {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .container p[style*="font-size: 12px"],
+  .container p[style*="font-size: 10.4px"] {
+    font-size: 0.875rem !important;
+  }
+}
