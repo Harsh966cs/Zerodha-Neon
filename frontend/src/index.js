@@ -16,6 +16,27 @@ import Signin from "./landing_page/Signin/Signin";
 const clerkPublishableKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 const afterSignUpUrl = process.env.REACT_APP_AFTER_SIGN_UP_URL || "http://localhost:3001/";
 
+// --- Access control: only these hosts may view the app ---
+// Edit / extend via REACT_APP_ALLOWED_HOSTS (comma-separated) in your env.
+const DEFAULT_ALLOWED_HOSTS = [
+  "zerodha-neon-five.vercel.app",
+  "localhost",
+  "127.0.0.1",
+];
+const extraHosts = (process.env.REACT_APP_ALLOWED_HOSTS || "")
+  .split(",")
+  .map((h) => h.trim().toLowerCase())
+  .filter(Boolean);
+const allowedHosts = new Set(
+  [...DEFAULT_ALLOWED_HOSTS, ...extraHosts].map((h) => h.toLowerCase())
+);
+
+const isAllowedHost = () => {
+  if (typeof window === "undefined") return true; // SSR/test safety
+  return allowedHosts.has(window.location.hostname.toLowerCase());
+};
+
+
 const appContent = (
   <BrowserRouter>
     <Navbar1 />
@@ -37,7 +58,26 @@ const appContent = (
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-if (!clerkPublishableKey) {
+if (!isAllowedHost()) {
+  root.render(
+    <div
+      style={{
+        padding: 24,
+        fontFamily: "sans-serif",
+        maxWidth: 560,
+        margin: "15vh auto",
+        textAlign: "center",
+        lineHeight: 1.6,
+      }}
+    >
+      <h1 style={{ color: "#d32f2f" }}>Access Denied</h1>
+      <p>
+        This site is only available from authorised domains. If you believe
+        this is a mistake, please contact the site owner.
+      </p>
+    </div>
+  );
+} else if (!clerkPublishableKey) {
   root.render(
     <div style={{ padding: 24, fontFamily: "sans-serif" }}>
       Missing <code>REACT_APP_CLERK_PUBLISHABLE_KEY</code> in{" "}
