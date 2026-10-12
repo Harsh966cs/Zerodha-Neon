@@ -12,10 +12,9 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import Footer from './landing_page/Footer';
 import Navbar1 from './landing_page/Navbar';
 import Signin from "./landing_page/Signin/Signin";
-import { getDashboardUrl, getDashboardRedirectUrl } from "./config/urls";
+import { getDashboardRedirectUrl } from "./config/urls";
 
 const clerkPublishableKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
-const dashboardUrl = getDashboardUrl();
 const afterSignUpUrl = getDashboardRedirectUrl(process.env.REACT_APP_AFTER_SIGN_UP_URL);
 
 // --- Access control: only these hosts may view the app ---
