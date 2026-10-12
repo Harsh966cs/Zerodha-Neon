@@ -76,7 +76,10 @@ PGUSER=
 PGPASSWORD=
 CLERK_SECRET_KEY=
 CLERK_PUBLISHABLE_KEY=
-ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001
+FRONTEND_URL=http://localhost:3000
+DASHBOARD_URL=http://localhost:3001
+# Optional comma-separated extra origins
+ALLOWED_ORIGINS=
 ```
 
 ### `dashboard/.env`
@@ -161,7 +164,10 @@ PGUSER=
 PGPASSWORD=
 CLERK_SECRET_KEY=
 CLERK_PUBLISHABLE_KEY=
-ALLOWED_ORIGINS=https://<frontend-domain>,https://<dashboard-domain>
+FRONTEND_URL=https://zerodha-neon-five.vercel.app
+DASHBOARD_URL=https://zerodha-neon-2w2u.vercel.app
+# Optional comma-separated extra origins, such as Vercel preview domains
+ALLOWED_ORIGINS=
 ```
 
 Run `schema.sql` and `seed.sql` in Neon before opening the deployed dashboard. In Clerk, use the same Clerk application and publishable key for both projects. Set the landing page domain as the primary domain and add `zerodha-neon-2w2u.vercel.app` as a satellite domain in Clerk's domain settings. Add both deployed URLs to Clerk's allowed origins and allowed redirect URLs. Cross-domain session sharing in production requires Clerk's multi-domain/satellite domain feature, which Clerk currently requires a paid production plan for. Never commit real keys or database credentials.
@@ -283,13 +289,15 @@ SELECT COUNT(*) FROM stocks;
 
 ### CORS error
 
-Set this in `backendWithNeon/.env`:
+Set the frontend and dashboard's exact origins in `backendWithNeon/.env` (or Render's environment settings):
 
 ```env
-ALLOWED_ORIGINS=http://localhost:3000,http://localhost:3001
+FRONTEND_URL=http://localhost:3000
+DASHBOARD_URL=http://localhost:3001
+ALLOWED_ORIGINS=
 ```
 
-Then restart the backend.
+For production, set these to the deployed frontend and dashboard origins. Add any extra allowed origins as a comma-separated list in `ALLOWED_ORIGINS`. Origins are compared without trailing slashes. Restart or redeploy the backend after changing environment variables.
 
 ## Validation
 

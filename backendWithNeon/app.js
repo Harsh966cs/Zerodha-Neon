@@ -20,7 +20,9 @@ const {
   PGUSER,
   PGPASSWORD,
   PORT = 8080,
-  ALLOWED_ORIGINS = "http://localhost:3000,http://localhost:3001",
+  FRONTEND_URL = "http://localhost:3000",
+  DASHBOARD_URL = "http://localhost:3001",
+  ALLOWED_ORIGINS = "",
 } = process.env;
 
 if (!PGHOST || !PGDATABASE || !PGUSER || !PGPASSWORD) {
@@ -30,7 +32,11 @@ if (!PGHOST || !PGDATABASE || !PGUSER || !PGPASSWORD) {
 }
 
 const app = express();
-const allowedOrigins = ALLOWED_ORIGINS.split(",").map((origin) => origin.trim());
+// Accept the two app URLs directly and allow extra origins for preview/custom
+// domains. Normalize trailing slashes so env values can be pasted as URLs.
+const allowedOrigins = [FRONTEND_URL, DASHBOARD_URL, ...ALLOWED_ORIGINS.split(",")]
+  .map((origin) => origin.trim().replace(/\/+$/, ""))
+  .filter(Boolean);
 const sql = neon(
   `postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require&channel_binding=require`,
 );
@@ -92,7 +98,7 @@ async function seedDefaultStocks() {
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.includes(origin.replace(/\/+$/, ""))) {
         return callback(null, true);
       }
       return callback(new Error("Origin is not allowed by CORS."));
