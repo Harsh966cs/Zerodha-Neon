@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Divider from '@mui/material/Divider';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useAuth } from '@clerk/clerk-react';
+import { getDashboardUrl } from '../config/urls';
 
 const pages = [
   { label: 'Signup', to: '/singup' },
@@ -69,7 +70,7 @@ function PlaceholderImg({ size = 48, src }) {
 
 function Navbar1() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const dashboardUrl = process.env.REACT_APP_DASHBOARD_URL || "http://localhost:3001";
+  const dashboardUrl = getDashboardUrl();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);

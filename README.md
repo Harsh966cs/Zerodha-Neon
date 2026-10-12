@@ -138,8 +138,9 @@ For both Vercel projects, set the project root directory to the matching folder 
 
 ```env
 REACT_APP_CLERK_PUBLISHABLE_KEY=
-REACT_APP_AFTER_SIGN_UP_URL=https://<dashboard-domain>/
-REACT_APP_DASHBOARD_URL=https://<dashboard-domain>
+REACT_APP_DASHBOARD_URL=https://zerodha-neon-2w2u.vercel.app
+REACT_APP_AFTER_SIGN_UP_URL=https://zerodha-neon-2w2u.vercel.app/
+REACT_APP_AFTER_SIGN_IN_URL=https://zerodha-neon-2w2u.vercel.app/
 ```
 
 ### Dashboard Vercel variables
@@ -147,8 +148,8 @@ REACT_APP_DASHBOARD_URL=https://<dashboard-domain>
 ```env
 REACT_APP_API_URL=https://<backend-domain>
 REACT_APP_CLERK_PUBLISHABLE_KEY=
-REACT_APP_AFTER_SIGN_UP_URL=https://<dashboard-domain>/
-REACT_APP_FRONTEND_URL=https://<frontend-domain>
+REACT_APP_AFTER_SIGN_UP_URL=https://zerodha-neon-2w2u.vercel.app/
+REACT_APP_FRONTEND_URL=https://zerodha-neon-five.vercel.app
 ```
 
 ### Render variables
@@ -163,7 +164,7 @@ CLERK_PUBLISHABLE_KEY=
 ALLOWED_ORIGINS=https://<frontend-domain>,https://<dashboard-domain>
 ```
 
-Run `schema.sql` and `seed.sql` in Neon before opening the deployed dashboard. In Clerk, add the frontend and dashboard domains to the allowed origins and configure the sign-in/sign-up redirect URLs used by the environment variables. Never commit real keys or database credentials.
+Run `schema.sql` and `seed.sql` in Neon before opening the deployed dashboard. In Clerk, use the same Clerk application and publishable key for both projects. Set the landing page domain as the primary domain and add `zerodha-neon-2w2u.vercel.app` as a satellite domain in Clerk's domain settings. Add both deployed URLs to Clerk's allowed origins and allowed redirect URLs. Cross-domain session sharing in production requires Clerk's multi-domain/satellite domain feature, which Clerk currently requires a paid production plan for. Never commit real keys or database credentials.
 
 This is an educational demo with static seeded prices. It does not connect to a stock exchange, place real orders, or manage real funds.
 

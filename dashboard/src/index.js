@@ -8,7 +8,8 @@ import { ClerkProvider, useAuth } from "@clerk/clerk-react";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const clerkPublishableKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
-const frontendUrl = process.env.REACT_APP_FRONTEND_URL || "http://localhost:3000";
+const frontendUrl = process.env.REACT_APP_FRONTEND_URL ||
+  (process.env.NODE_ENV === "production" ? "https://zerodha-neon-five.vercel.app" : "http://localhost:3000");
 
 function AuthGate({ children }) {
   const { isLoaded, isSignedIn } = useAuth();
@@ -51,6 +52,10 @@ if (!clerkPublishableKey) {
     <React.StrictMode>
       <ClerkProvider
         publishableKey={clerkPublishableKey}
+        isSatellite
+        domain={window.location.host}
+        signInUrl={`${frontendUrl}/sign-in`}
+        signUpUrl={`${frontendUrl}/singup`}
         signUpFallbackRedirectUrl="/"
         signInFallbackRedirectUrl="/"
       >

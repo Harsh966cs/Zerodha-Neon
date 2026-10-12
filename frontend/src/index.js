@@ -12,9 +12,11 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import Footer from './landing_page/Footer';
 import Navbar1 from './landing_page/Navbar';
 import Signin from "./landing_page/Signin/Signin";
+import { getDashboardUrl, getDashboardRedirectUrl } from "./config/urls";
 
 const clerkPublishableKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
-const afterSignUpUrl = process.env.REACT_APP_AFTER_SIGN_UP_URL || "http://localhost:3001/";
+const dashboardUrl = getDashboardUrl();
+const afterSignUpUrl = getDashboardRedirectUrl(process.env.REACT_APP_AFTER_SIGN_UP_URL);
 
 // --- Access control: only these hosts may view the app ---
 // Edit / extend via REACT_APP_ALLOWED_HOSTS (comma-separated) in your env.
@@ -93,6 +95,8 @@ if (!isAllowedHost()) {
       signInUrl="/sign-in"
       signUpFallbackRedirectUrl={afterSignUpUrl}
       signInFallbackRedirectUrl={afterSignUpUrl}
+      signUpForceRedirectUrl={afterSignUpUrl}
+      signInForceRedirectUrl={getDashboardRedirectUrl(process.env.REACT_APP_AFTER_SIGN_IN_URL)}
     >
       {appContent}
     </ClerkProvider>

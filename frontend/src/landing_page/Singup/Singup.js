@@ -1,5 +1,6 @@
 import React from 'react'
 import { SignUp } from "@clerk/clerk-react";
+import { getDashboardRedirectUrl } from "../../config/urls";
 
 const Singup = () => {
   return (
@@ -11,7 +12,7 @@ const Singup = () => {
             <SignUp 
               routing="path"
               path="/singup"
-              fallbackRedirectUrl={process.env.REACT_APP_AFTER_SIGN_UP_URL || "http://localhost:3001/"}
+              forceRedirectUrl={getDashboardRedirectUrl(process.env.REACT_APP_AFTER_SIGN_UP_URL)}
               signInUrl="/sign-in"
             />
             </p>
