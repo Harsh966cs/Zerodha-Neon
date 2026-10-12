@@ -174,3 +174,106 @@ video {
     font-size: 0.875rem !important;
   }
 }
+
+/* Keep inline-sized landing page content inside the available viewport. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@media (max-width: 1023px) {
+  .container.row,
+  .row {
+    max-width: 100%;
+  }
+
+  .container.row[style*="padding: 150px"],
+  .row[style*="padding: 150px"] {
+    padding: clamp(1rem, 4vw, 2.5rem) !important;
+  }
+
+  .col-6[style*="padding: 100px"] {
+    padding: clamp(1rem, 4vw, 2.5rem) !important;
+  }
+
+  .row img[style*="40rem"],
+  img[style*="40rem"] {
+    width: min(100%, 40rem) !important;
+  }
+
+  .row img[width],
+  .row img[style*="450px"],
+  .row img[style*="350px"] {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .container,
+  .container-fluid {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .row {
+    row-gap: 1.5rem;
+  }
+
+  .row > [class*="col-"] {
+    min-width: 0;
+  }
+
+  .row button[style*="width: 20%"],
+  .row a button[style*="width: 20%"] {
+    width: min(100%, 18rem) !important;
+  }
+
+  .row img[style*="400px"] {
+    width: min(100%, 25rem) !important;
+  }
+
+  .row div[style*="display: flex"] {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .row div[style*="display: flex"] > a {
+    max-width: 100%;
+  }
+
+  .row h3[style*="margin-left"],
+  .row p[style*="margin-left"] {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  .row a,
+  .container a.btn,
+  .row button,
+  .container button {
+    min-height: 44px;
+  }
+
+  .row a:not(.btn) {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .row > .col-2,
+  .row > .col-3,
+  .row > .col-4 {
+    flex: 0 0 50%;
+    width: 50%;
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    max-width: min(100% - 3rem, 90rem);
+  }
+}
