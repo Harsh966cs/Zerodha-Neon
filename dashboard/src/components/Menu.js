@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton, useAuth, ClerkProvider } from '@clerk/clerk-react';
+import { SignedIn, UserButton, useAuth } from '@clerk/clerk-react';
 import { Link } from "react-router-dom";
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 
-const clerkPublishableKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
-const afterSignUpUrl = process.env.REACT_APP_AFTER_SIGN_UP_URL || "/";
 const frontendUrl = process.env.REACT_APP_FRONTEND_URL || "http://localhost:3000";
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);

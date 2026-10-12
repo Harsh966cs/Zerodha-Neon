@@ -1,8 +1,18 @@
+import dns from "node:dns";
+import net from "node:net";
 import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import { neon } from "@neondatabase/serverless";
 import { clerkMiddleware, getAuth } from "@clerk/express";
+
+// Node's Happy Eyeballs (autoSelectFamily) aborts the first IP family after
+// ~250ms. From India to Neon in us-east-2, IPv4 often needs longer, IPv6 is
+// unreachable, and fetch then fails with ETIMEDOUT. Prefer IPv4 and wait.
+dns.setDefaultResultOrder("ipv4first");
+if (typeof net.setDefaultAutoSelectFamily === "function") {
+  net.setDefaultAutoSelectFamily(false);
+}
 
 const {
   PGHOST,
@@ -14,7 +24,9 @@ const {
 } = process.env;
 
 if (!PGHOST || !PGDATABASE || !PGUSER || !PGPASSWORD) {
-  throw new Error("PGHOST, PGDATABASE, PGUSER, and PGPASSWORD are required.");
+  throw new Error(
+    "PGHOST, PGDATABASE, PGUSER, and PGPASSWORD are required. Copy backendWithNeon/.env.example to backendWithNeon/.env and fill in your Neon values.",
+  );
 }
 
 const app = express();
@@ -275,6 +287,52 @@ app.post("/api/buy", authenticated, async (req, res) => {
     RETURNING qty, avg_price
   `;
   res.status(201).json({ ok: true, holding: rows[0] });
+});
+
+app.post("/api/sell", authenticated, async (req, res) => {
+  const user = getUserDetails(req);
+  const qty = parsePositiveNumber(req.body.qty, "qty");
+  const price = parsePositiveNumber(req.body.price, "price");
+  const stock = await findStock(req.body.stockId, req.body.symbol);
+  await ensureUser(user);
+
+  const currentHolding = await sql`
+    SELECT id, qty, avg_price
+    FROM holdings
+    WHERE clerk_id = ${user.clerkId} AND stock_id = ${stock.id}
+  `;
+
+  if (currentHolding.length === 0 || Number(currentHolding[0].qty) < qty) {
+    const available = currentHolding.length === 0 ? 0 : Number(currentHolding[0].qty);
+    return res.status(400).json({
+      error: `Insufficient holding quantity. You have ${available} shares, but tried to sell ${qty}.`,
+    });
+  }
+
+  await sql`
+    INSERT INTO transactions (clerk_id, stock_id, type, qty, price)
+    VALUES (${user.clerkId}, ${stock.id}, 'SELL', ${qty}, ${price})
+  `;
+
+  const remainingQty = Number(currentHolding[0].qty) - qty;
+  let updatedHolding = null;
+
+  if (remainingQty <= 0) {
+    await sql`
+      DELETE FROM holdings
+      WHERE clerk_id = ${user.clerkId} AND stock_id = ${stock.id}
+    `;
+  } else {
+    const updated = await sql`
+      UPDATE holdings
+      SET qty = ${remainingQty}, updated_at = now()
+      WHERE clerk_id = ${user.clerkId} AND stock_id = ${stock.id}
+      RETURNING qty, avg_price
+    `;
+    updatedHolding = updated[0];
+  }
+
+  res.status(200).json({ ok: true, holding: updatedHolding, soldQty: qty });
 });
 
 app.get("/api/orders", authenticated, async (req, res) => {

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "node --dns-result-order=ipv4first --no-network-family-autoselection app.js",
+    "dev": "nodemon --exec \"node --dns-result-order=ipv4first --no-network-family-autoselection\" app.js",
     "test": "node --check app.js"
   },
   "keywords": [],

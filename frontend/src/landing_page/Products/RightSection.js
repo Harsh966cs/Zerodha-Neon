@@ -22,7 +22,7 @@ const RightSection = ({productName,productDecription,demoLink,first,imageUrl}) =
                 textDecoration: "none",
               }}
             >
-              {first} <i class="fa fa-arrow-right" aria-hidden="true"></i>
+              {first} <i className="fa fa-arrow-right" aria-hidden="true"></i>
             </Link>
           )}
         </div>

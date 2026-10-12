@@ -8,41 +8,60 @@ import { ClerkProvider, useAuth } from "@clerk/clerk-react";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const clerkPublishableKey = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
-const afterSignUpUrl = process.env.REACT_APP_AFTER_SIGN_UP_URL || "/";
 const frontendUrl = process.env.REACT_APP_FRONTEND_URL || "http://localhost:3000";
 
 function AuthGate({ children }) {
-  const { isSignedIn } = useAuth();
+  const { isLoaded, isSignedIn } = useAuth();
 
   useEffect(() => {
-    if (isSignedIn === false) {
+    if (isLoaded && isSignedIn === false) {
       window.location.assign(frontendUrl);
     }
-  }, [isSignedIn]);
+  }, [isLoaded, isSignedIn]);
+
+  if (!isLoaded) {
+    return (
+      <div style={{ padding: 24, fontFamily: "sans-serif" }}>
+        Loading dashboard…
+      </div>
+    );
+  }
 
   if (!isSignedIn) {
-    // covers both isSignedIn === undefined (still loading)
-    // and isSignedIn === false (not signed in, redirect in flight)
-    return null;
+    return (
+      <div style={{ padding: 24, fontFamily: "sans-serif" }}>
+        Redirecting to sign in…
+      </div>
+    );
   }
 
   return children;
 }
 
-root.render(
-  <React.StrictMode>
-    <ClerkProvider
-      publishableKey={clerkPublishableKey}
-      signUpFallbackRedirectUrl={afterSignUpUrl}
-      signInFallbackRedirectUrl={afterSignUpUrl}
-    >
-      <AuthGate>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/*" element={<Home />} />
-          </Routes>
-        </BrowserRouter>
-      </AuthGate>
-    </ClerkProvider>
-  </React.StrictMode>
-);
+if (!clerkPublishableKey) {
+  root.render(
+    <div style={{ padding: 24, fontFamily: "sans-serif" }}>
+      Missing <code>REACT_APP_CLERK_PUBLISHABLE_KEY</code> in{" "}
+      <code>dashboard/.env</code>. Copy <code>dashboard/.env.example</code> to{" "}
+      <code>dashboard/.env</code> and restart the dashboard.
+    </div>
+  );
+} else {
+  root.render(
+    <React.StrictMode>
+      <ClerkProvider
+        publishableKey={clerkPublishableKey}
+        signUpFallbackRedirectUrl="/"
+        signInFallbackRedirectUrl="/"
+      >
+        <AuthGate>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/*" element={<Home />} />
+            </Routes>
+          </BrowserRouter>
+        </AuthGate>
+      </ClerkProvider>
+    </React.StrictMode>
+  );
+}

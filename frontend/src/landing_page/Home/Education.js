@@ -15,7 +15,7 @@ const Education = () => {
           </p>
           <a className="p-2" style={{ width: "20%", textDecoration: "none" }}>
             Varsity
-            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
           </a>
 
           <p>
@@ -25,7 +25,7 @@ const Education = () => {
 
           <a className="p-2" style={{ width: "20%", textDecoration: "none" }}>
             TradingQ&A
-            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+            <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
           </a>
         </div>
       </div>

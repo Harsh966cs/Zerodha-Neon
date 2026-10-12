@@ -14,25 +14,25 @@ const Footer = () => {
           <nr></nr>
           <div>
             <span>
-              <i class="fa fa-facebook-square" aria-hidden="true"></i>&nbsp;
+              <i className="fa fa-facebook-square" aria-hidden="true"></i>&nbsp;
             </span>
             <span>
               {" "}
-              <i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;{" "}
+              <i className="fa fa-instagram" aria-hidden="true"></i>&nbsp;{" "}
             </span>
             <span>
               {" "}
-              <i class="fa fa-youtube-play" aria-hidden="true"></i>{" "}
+              <i className="fa fa-youtube-play" aria-hidden="true"></i>{" "}
             </span>
           </div>
           <br></br>
           <div>
             <span>
-              <i class="fa fa-telegram" aria-hidden="true"></i>{" "}
+              <i className="fa fa-telegram" aria-hidden="true"></i>{" "}
             </span>
             <span>
               {" "}
-              <i class="fa fa-whatsapp" aria-hidden="true"></i>
+              <i className="fa fa-whatsapp" aria-hidden="true"></i>
             </span>
           </div>
           <br></br>
@@ -43,8 +43,8 @@ const Footer = () => {
           </div>
         </div>
         <div className="col-2">
-          <ul class="list-style" style={{ listStyleType: "none" }}>
-            <li class="nav-head">Account</li>
+          <ul className="list-style" style={{ listStyleType: "none" }}>
+            <li className="nav-head">Account</li>
             <li>
               <a
                 style={{ color: "#9b9b9b", textDecoration: "none" }}
@@ -112,8 +112,8 @@ const Footer = () => {
           </ul>
         </div>
         <div className="col-2">
-          <ul class="list-style" style={{ listStyleType: "none" }}>
-            <li class="nav-head">Support</li>
+          <ul className="list-style" style={{ listStyleType: "none" }}>
+            <li className="nav-head">Support</li>
             <li>
               <a
                 style={{ color: "#9b9b9b", textDecoration: "none" }}
@@ -181,8 +181,8 @@ const Footer = () => {
           </ul>
         </div>
         <div className="col-2">
-          <ul class="list-style" style={{ listStyleType: "none" }}>
-            <li class="nav-head">Company</li>
+          <ul className="list-style" style={{ listStyleType: "none" }}>
+            <li className="nav-head">Company</li>
             <li>
               <a
                 style={{ color: "#9b9b9b", textDecoration: "none" }}
@@ -250,8 +250,8 @@ const Footer = () => {
           </ul>
         </div>
         <div className="col-2">
-          <ul class="list-style" style={{ listStyleType: "none" }}>
-            <li class="nav-head">Quick links</li>
+          <ul className="list-style" style={{ listStyleType: "none" }}>
+            <li className="nav-head">Quick links</li>
             <li>
               <a
                 style={{ color: "#9b9b9b", textDecoration: "none" }}

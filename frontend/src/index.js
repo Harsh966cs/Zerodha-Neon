@@ -38,7 +38,13 @@ const appContent = (
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 if (!clerkPublishableKey) {
-  root.render(appContent);
+  root.render(
+    <div style={{ padding: 24, fontFamily: "sans-serif" }}>
+      Missing <code>REACT_APP_CLERK_PUBLISHABLE_KEY</code> in{" "}
+      <code>frontend/.env</code>. Copy <code>frontend/.env.example</code> to{" "}
+      <code>frontend/.env</code> and restart the frontend.
+    </div>
+  );
 } else {
   root.render(
     <ClerkProvider

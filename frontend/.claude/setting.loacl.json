@@ -1,0 +1,8 @@
+{
+"env": {
+"ANTHROPIC_BASE_URL": "https://tokenharbor.ai",
+"ANTHROPIC_AUTH_TOKEN": "thk_live_IzWP-X3mZUNQ9oeZmoKZYRyCC0td0s1kZdCcwv_8yZlZgUnyuUMIr_cJKez9IXoH",
+"ANTHROPIC_API_KEY": "",
+"ANTHROPIC_MODEL": "claude-haiku-5.5:free"
+}
+}
