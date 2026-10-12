@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const frontendUrl = process.env.REACT_APP_FRONTEND_URL || "http://localhost:3000";
 const Menu = () => {
   const [selectedMenu, setSelectedMenu] = useState(0);
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const {isSignedIn} = useAuth();
 
 
@@ -17,15 +16,6 @@ const Menu = () => {
    },[isSignedIn])
   const handleMenuClick = (index) => {
     setSelectedMenu(index);
-  };
-
-  const handleLogout = () =>{
-     console.log("hello world")
-    window.location.assign(`${frontendUrl}/`)
-  }
-
-  const handleProfileClick = (index) => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
   };
 
   const menuClass = "menu";
