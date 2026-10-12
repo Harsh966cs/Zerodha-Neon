@@ -14,7 +14,7 @@ function Brokerage() {
         }}
       >
         <div className="col-4 ">
-          <img src="media\pricing0.svg" />
+          <img src="media\pricing0.svg" alt="Pricing illustration" />
           <br></br>
           <br></br>
           <h1 style={{ textAlign: "center" }}>Free equity delivery</h1>
@@ -25,7 +25,7 @@ function Brokerage() {
       </h3>
         </div>
         <div className="col-4 ">
-          <img src="media\intradayTrades.svg"/>
+          <img src="media\intradayTrades.svg" alt="Intraday and F&O trades"/>
           <br></br>
           <br></br>
              <h1 style={{ textAlign: "center" }}>Intraday and F&O trades</h1>
@@ -36,7 +36,7 @@ function Brokerage() {
       </h3>
         </div>
         <div className="col-4 ">
-          <img src="media\pricing0.svg" />
+          <img src="media\pricing0.svg" alt="Pricing illustration" />
           <br></br>
           <br></br>
           <h1 style={{ textAlign: "center" }}>Free direct MF</h1>

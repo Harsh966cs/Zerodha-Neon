@@ -8,7 +8,7 @@ import About from    '../src/landing_page/About/About';
 import Products from  '../src/landing_page/Products/ProductPage'
 import Support from '../src/landing_page/Support/Support'
 import {BrowserRouter,Route,Routes} from "react-router-dom";
-import { ClerkProvider, SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/clerk-react";
+import { ClerkProvider } from "@clerk/clerk-react";
 import Footer from './landing_page/Footer';
 import Navbar1 from './landing_page/Navbar';
 import Signin from "./landing_page/Signin/Signin";

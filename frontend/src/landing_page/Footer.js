@@ -5,7 +5,7 @@ const Footer = () => {
     <div className="container " style={{ justifyContent: "space-between" }}>
       <div className="container row">
         <div className="col-4">
-          <img src="media/logo.svg" style={{ width: "16rem" }} />
+          <img src="media/logo.svg" style={{ width: "16rem" }} alt="Zerodha logo" />
           <br></br>
           <p style={{ fontSize: "12px" }}>
             <br></br>© 2010 - 2026, Zerodha Broking Ltd.<br></br>All rights
@@ -38,8 +38,8 @@ const Footer = () => {
           <br></br>
           <div style={{display:"flex"}}>
             {" "}
-            <img src="media/googlePlayBadge.svg" style={{ width: "5rem" }} />&nbsp;
-            <img src="media/appstoreBadge.svg"  style={{width:"5rem",height:"1.5rem"}}/>
+            <img src="media/googlePlayBadge.svg" style={{ width: "5rem" }} alt="Get it on Google Play" />&nbsp;
+            <img src="media/appstoreBadge.svg"  style={{width:"5rem",height:"1.5rem"}} alt="Download on the App Store"/>
           </div>
         </div>
         <div className="col-2">
@@ -133,6 +133,7 @@ const Footer = () => {
             <li>
               <a
                 target="_blank"
+                rel="noreferrer"
                 href="https://support.zerodha.com/category/your-zerodha-account/your-profile/ticket-creation/articles/how-do-i-create-a-ticket-at-zerodha"
               >
                 How to file a complaint?
@@ -141,6 +142,7 @@ const Footer = () => {
             <li>
               <a
                 target="_blank"
+                rel="noreferrer"
                 href="https://support.zerodha.com/category/your-zerodha-account/your-profile/ticket-creation/articles/track-complaints-or-tickets"
               >
                 Status of your complaints

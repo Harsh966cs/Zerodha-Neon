@@ -15,7 +15,7 @@ const LeftSection = ({
   return (
     <div className="container row p-5 " style={{justifyContent:"center",display:"flex",margin:"auto"}}>
       <div className="col-6">
-        <img src={imageUrl} />
+        <img src={imageUrl} alt={productName} />
       </div>
       <div className="col-6" style={{padding:"100px"}}>
         <h1 style={{padding:"2px"}}>{productName}</h1>
@@ -29,8 +29,8 @@ const LeftSection = ({
          <br></br>
            <div style={{display:"flex"}}>
             {" "}
-            <Link to={getPlayStoreLink}><img src="media/googlePlayBadge.svg" style={{ width: "10rem" }} /></Link> &nbsp;&nbsp; &nbsp;
-            <Link to={getPlayStoreLink}><img src="media/appstoreBadge.svg"  style={{width:"9rem"}}/></Link>
+            <Link to={getPlayStoreLink}><img src="media/googlePlayBadge.svg" style={{ width: "10rem" }} alt="Get it on Google Play" /></Link> &nbsp;&nbsp; &nbsp;
+            <Link to={getPlayStoreLink}><img src="media/appstoreBadge.svg"  style={{width:"9rem"}} alt="Download on the App Store"/></Link>
           </div>
       </div>
     </div>

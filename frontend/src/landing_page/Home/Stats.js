@@ -31,10 +31,11 @@ const Stats = () => {
           </p>
         </div>
         <div className="col-6 p-5" style={{ justifyContent: "center" }}>
-          <img src="media\ecosystem.png" style={{ width: "40rem" }} />
+          <img src="media\ecosystem.png" style={{ width: "40rem" }} alt="The Zerodha ecosystem" />
           <a
             className="p-3"
             style={{ width: "20%", marginLeft: "5rem", textDecoration: "none" }}
+            href="https://zerodha.com/products/"
           >
             Explore our products{" "}
             <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
@@ -42,6 +43,7 @@ const Stats = () => {
           <a
             className="p-3"
             style={{ width: "20%", margin: "0 auto", textDecoration: "none" }}
+            href="https://kite.zerodha.com/demo/"
           >
             Try Kite demo{" "}
             <i className="fa fa-long-arrow-right" aria-hidden="true"></i>

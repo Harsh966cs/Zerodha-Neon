@@ -14,13 +14,13 @@ const Pricing = () => {
         </div>
         <div className='col-6' st>
           <span className='col-2'>
-             <img src='media\kc-banner-image.svg'/>
+             <img src='media\kc-banner-image.svg' alt="Kite Connect banner"/>
            </span>
           <span className='col-2'> 
-             <img src='media\kc-banner-image.svg'/>
+             <img src='media\kc-banner-image.svg' alt="Kite Connect banner"/>
            </span>
               <span className='col-2'>
-             <img src='media\kc-banner-image.svg'/>
+             <img src='media\kc-banner-image.svg' alt="Kite Connect banner"/>
              </span>
         </div>
       </div>

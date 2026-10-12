@@ -13,7 +13,7 @@ const Team = () => {
       </div>
       <div className="container row" style={{margin:"auto"}} >
         <div className="col-6"  style={{alignItems:"center"}}>
-          <img src='media\nithinKamath.jpg' style={{borderRadius:"50%",width:"400px"}}/>
+          <img src='media\nithinKamath.jpg' style={{borderRadius:"50%",width:"400px"}} alt="Nithin Kamath"/>
           <br></br>
           <br></br>
           <h3 className="container" style={{marginLeft:"85px"}}>Nithin Kamath</h3>

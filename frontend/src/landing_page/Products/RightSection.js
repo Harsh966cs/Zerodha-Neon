@@ -28,7 +28,7 @@ const RightSection = ({productName,productDecription,demoLink,first,imageUrl}) =
         </div>
       </div>
        <div className="col-6">
-        <img src={imageUrl} />
+        <img src={imageUrl} alt={productName} />
       </div>
     </div>
   );

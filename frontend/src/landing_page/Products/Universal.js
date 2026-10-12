@@ -22,7 +22,7 @@ const Universal = () => {
       <br></br>
       <div className="row" style={{display:"flex",justifyContent:"space-evenly",alignItems:"center",padding:"150px"}}>
         <div className="col-4 " >
-         <img src="media\zerodhaFundhouse.png" />
+         <img src="media\zerodhaFundhouse.png" alt="Zerodha Fundhouse" />
           <p style={{textAlign:"center"}}>
             Our asset management venture <br></br>that is creating simple and transparent
             index <br></br>funds to help you save for your goals.
@@ -30,28 +30,28 @@ const Universal = () => {
           <br></br>
            <br></br>
             <br></br>
-             <img src="media\streakLogo.png" width={"350px"}/>
+             <img src="media\streakLogo.png" width={"350px"} alt="Streak"/>
           <p style={{textAlign:"center"}}>
             Options trading platform that lets you <br></br>create strategies, analyze positions, and examine <br></br>data points like open interest, FII/DII, and more.
           </p>
 
         </div>
         <div className="col-4 " >
-         <img src="media\sensibullLogo.svg" width={"450px"}  />
+         <img src="media\sensibullLogo.svg" width={"450px"}  alt="Sensibull"/>
           <p style={{textAlign:"center"}}>
             Options trading platform that lets you <br></br>create strategies, analyze positions, and examine <br></br>data points like open interest, FII/DII, and more.
           </p>
           <br></br>
            <br></br>
             <br></br>
-             <img src="media\smallcaseLogo.png" width={"350px"} />
+             <img src="media\smallcaseLogo.png" width={"350px"} alt="Smallcase" />
           <p style={{textAlign:"center"}}>
             Our asset management venture <br></br>that is creating simple and transparent
             index <br></br>funds to help you save for your goals.
           </p>
         </div>
        <div className="col-4 " >
-         <img src="media\tijori.svg"  width={"350px"} style={{marginLeft:"50px"}}/>
+         <img src="media\tijori.svg"  width={"350px"} style={{marginLeft:"50px"}} alt="Tijori"/>
           <p style={{textAlign:"center"}}>
               Investment research platform <br></br>that offers detailed insights on stocks, <br></br>
 sectors, supply chains, and more.
@@ -59,7 +59,7 @@ sectors, supply chains, and more.
           <br></br>
            <br></br>
             <br></br>
-             <img src="media\dittoLogo.png" width={"350px"} />
+             <img src="media\dittoLogo.png" width={"350px"} alt="Ditto" />
           <p style={{textAlign:"center"}}>
             Our asset management venture <br></br>that is creating simple and transparent
             index <br></br>funds to help you save for your goals.
